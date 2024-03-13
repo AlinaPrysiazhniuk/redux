@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   locale: localeReducer,
 });
 
+//оголошуємо стор - 1 крок
 export const store = createStore(rootReducer, composeWithDevTools());
 
 // const initialState = {
