@@ -1,14 +1,15 @@
-import { Layout } from "./Layout/Layout";
-import { AppBar } from "./AppBar/AppBar";
-import { TaskForm } from "./TaskForm/TaskForm";
-import { TaskList } from "./TaskList/TaskList";
+import { useSelector } from "react-redux";
+import Balance from "./Balance";
+import LangSwitcher from "./LangSwitcher";
 
 export default function App() {
+  const lang = useSelector((state) => state.locale.lang);
   return (
-    <Layout>
-      <AppBar />
-      <TaskForm />
-      <TaskList />
-    </Layout>
+    <div>
+      <Balance />
+      <LangSwitcher />
+
+      <p>Selected lang:{lang}</p>
+    </div>
   );
 }
