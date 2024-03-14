@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import { Calculate } from "./Calculate";
-// import Balance from "./Balance";
+// import { useSelector } from "react-redux";
+// import { Calculate } from "./Calculate";
+import Balance from "./Balance";
 // import LangSwitcher from "./LangSwitcher";
 // import { selectlang } from "../redux/localeSlice";
 
@@ -9,11 +9,11 @@ export default function App() {
 
   return (
     <div>
-      <Calculate />
-      {/* <Balance />
-      <LangSwitcher />
+      {/* <Calculate /> */}
+      <Balance />
+      {/* <LangSwitcher /> */}
 
-      <p>Selected lang:{lang}</p> */}
+      {/* <p>Selected lang:{lang}</p> */}
     </div>
   );
 }
