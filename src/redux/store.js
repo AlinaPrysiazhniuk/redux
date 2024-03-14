@@ -1,17 +1,16 @@
-import { combineReducers, createStore } from "redux";
-import { composeWithDevTools } from "@redux-devtools/extension";
+import { combineReducers } from "redux";
+// import { composeWithDevTools } from "@redux-devtools/extension";
 import { balanceReducer } from "./balanceSlice";
-import { localeReducer } from "./localeSlice";
-import { calculateReducer } from "./calculateSlice";
+import { configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   balance: balanceReducer,
-  locale: localeReducer,
-  result: calculateReducer,
 });
 
 //оголошуємо стор - 1 крок
-export const store = createStore(rootReducer, composeWithDevTools());
+export const store = configureStore({
+  reducer: rootReducer,
+});
 
 // const initialState = {
 //   balance: {
