@@ -4,9 +4,7 @@ import { useState } from "react";
 
 export default function Balance() {
   const balance = useSelector((state) => state.balance.value);
-
   const dispatch = useDispatch();
-
   const [value, setValue] = useState(0);
 
   return (

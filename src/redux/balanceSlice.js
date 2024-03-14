@@ -21,6 +21,5 @@ const balanceSlice = createSlice({
   },
 });
 
-console.log(valueInitialState);
 export const { deposit, withdraw } = balanceSlice.actions;
 export const balanceReducer = balanceSlice.reducer;
