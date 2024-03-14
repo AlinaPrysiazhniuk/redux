@@ -7,7 +7,7 @@ export default function Balance() {
 
   const dispatch = useDispatch();
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(0);
 
   return (
     <div>
