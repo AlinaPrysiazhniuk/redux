@@ -1,19 +1,22 @@
-// import { useSelector } from "react-redux";
-// import { Calculate } from "./Calculate";
-import Balance from "./Balance";
-// import LangSwitcher from "./LangSwitcher";
-// import { selectlang } from "../redux/localeSlice";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTasks } from "../redux/operations";
+import { getTasks } from "../redux/selectors";
 
 export default function App() {
-  // const lang = useSelector(selectlang);
+  const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector(getTasks);
 
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
+
+  console.log(items);
   return (
     <div>
-      {/* <Calculate /> */}
-      <Balance />
-      {/* <LangSwitcher /> */}
-
-      {/* <p>Selected lang:{lang}</p> */}
+      {isLoading && <p>Loading tasks...</p>}
+      {error && <p>{error}</p>}
+      <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p>
     </div>
   );
 }
