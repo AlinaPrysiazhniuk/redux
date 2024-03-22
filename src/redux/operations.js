@@ -26,3 +26,16 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
+
+export const addTask = createAsyncThunk(
+  "tasks/addTasks",
+  async (newTask, thunkAPI) => {
+    console.log("add task");
+    try {
+      const response = await axios.post("/tasks", newTask);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
