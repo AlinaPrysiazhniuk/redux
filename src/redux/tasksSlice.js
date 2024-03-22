@@ -1,46 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
-
-const taskInitialState = [
-  { id: 0, text: "Learn HTML and CSS", completed: true },
-  { id: 1, text: "Get good at JavaScript", completed: true },
-  { id: 2, text: "Master React", completed: false },
-  { id: 3, text: "Discover Redux", completed: false },
-  { id: 4, text: "Build amazing apps", completed: false },
-];
+import { fetchTasks, deleteTask } from "./operations";
 
 const tasksSlice = createSlice({
   name: "tasks",
-  initialState: taskInitialState,
-  reducers: {
-    addTask: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-      prepare(text) {
-        return {
-          payload: {
-            text,
-            id: nanoid(),
-            completed: false,
-          },
-        };
-      },
-    },
-    deleteTask(state, action) {
-      const index = state.findIndex((task) => task.id === action.payload);
-      state.splice(index, 1);
-    },
-    toggleCompleted(state, action) {
-      for (const task of state) {
-        if (task.id === action.payload) {
-          task.completed = !task.completed;
-          break;
-        }
-      }
-    },
-  },
+  initialState: { items: [], loading: false, error: null },
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchTasks.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(fetchTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+        state.error = false;
+      })
+      .addCase(fetchTasks.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      })
+      .addCase(deleteTask.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.id
+        );
+      })
+      .addCase(deleteTask.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      }),
 });
 
-export const { addTask, deleteTask, toggleCompleted } = tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;
